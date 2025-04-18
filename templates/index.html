@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Disease Prediction</title>
+    <style>
+        body { font-family: Arial; margin: 20px; background-color: #f8f8f8; }
+        .container { background: #fff; padding: 20px; border-radius: 10px; width: 90%; max-width: 700px; margin: auto; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h2 { color: #333; }
+        .checkbox-group { display: flex; flex-wrap: wrap; }
+        .checkbox-group label { width: 50%; padding: 5px 0; }
+        button { margin-top: 20px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; }
+        .result { margin-top: 20px; font-size: 18px; color: green; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Disease Prediction from Symptoms</h2>
+        <form method="POST" action="/predict">
+            <div class="checkbox-group">
+                {% for symptom in symptoms %}
+                    <label><input type="checkbox" name="{{ symptom }}"> {{ symptom.replace('_', ' ').title() }}</label>
+                {% endfor %}
+            </div>
+            <button type="submit">Predict</button>
+        </form>
+        {% if prediction_text %}
+            <div class="result">{{ prediction_text }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
